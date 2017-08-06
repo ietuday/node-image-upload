@@ -8,16 +8,17 @@ var storage = multer.diskStorage({
     },
     filename: function (req, file, cb) {
         cb(null, file.fieldname + '-' + Date.now() + '.jpg')
+        console.log("Description :", file.fieldname + '.jpg');
     }
 });
 
-var upload = multer({ storage: storage }).single('profileImage');
+var upload = multer({ storage: storage }).single('keyImage');
 
 
 router.post('/', function (req, res) {
     upload(req, res, function (err) {
         if (err) {
-            // An error occurred when uploading
+            console.log("Image not Uploaded : ",err);
         }
         res.json({
             success: true,
